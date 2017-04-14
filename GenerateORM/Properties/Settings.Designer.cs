@@ -46,5 +46,17 @@ namespace GenerateORM.Properties {
                 this["Setting1"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("22")]
+        public string Setting2 {
+            get {
+                return ((string)(this["Setting2"]));
+            }
+            set {
+                this["Setting2"] = value;
+            }
+        }
     }
 }
