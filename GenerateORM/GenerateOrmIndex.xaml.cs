@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GenerateORM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,19 @@ namespace GenerateORM
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataConnexionViewModel DataConnexionObject = new DataConnexionViewModel();
+            DataConnexionObject.LoadCmdLanguage();
+
+            foreach (var item in DataConnexionObject.LanguagesLoad)
+            {
+                usr_Control_Connexion_BDD.Cmb_Language.ItemsSource = item.Language;
+            }
+            //usr_Control_Connexion_BDD.Cmb_Language.ItemsSource = DataConnexionObject.LanguagesLoad.Select(s => s.Language);
+            //usr_Control_Connexion_BDD.Cmb_Language.ItemsSource = Enum.GetValues(typeof(Model.ChoixLanguage)).Cast<Model.ChoixLanguage>();
         }
     }
 }

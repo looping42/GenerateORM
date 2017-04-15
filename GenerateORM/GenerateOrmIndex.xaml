@@ -4,12 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GenerateORM"
+        xmlns:views = "clr-namespace:GenerateORM.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="378.524" Width="703.084">
     <Grid>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="188,45,0,0" VerticalAlignment="Top" Width="163" Height="26" />
-        <Label x:Name="Lbl_ChoixBdd" Content="Choix de la BDD" HorizontalAlignment="Left" Margin="33,45,0,0" VerticalAlignment="Top" Width="135" />
-        <Label x:Name="Lbl_ChaineConnexion" Content="Chaîne de connexion" HorizontalAlignment="Left" Margin="33,8,0,0" VerticalAlignment="Top" Width="135" />
-        <TextBox x:Name="Txt_Chaineconnexion" HorizontalAlignment="Left" Height="23" Margin="188,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="459" />
+        <views:usr_Control_Connexion_BDD x:Name = "usr_Control_Connexion_BDD" Loaded = "UserControl_Loaded" />
     </Grid>
 </Window>

@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="GenerateORM.Views.usr_Control_Connexion_BDD"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:GenerateORM.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="140" d:DesignWidth="700">
+    <Grid>
+        <ComboBox x:Name="Cmb_ChoixBdd"  ItemsSource="{Binding Path=ChoixBdd}" SelectedValue="{Binding Path=ChoixBdd}" HorizontalAlignment="Left" Margin="188,85,0,0" VerticalAlignment="Top" Width="163" Height="26" />
+        <Label x:Name="Lbl_ChoixBdd" Content="Choix de la BDD" HorizontalAlignment="Left" Margin="33,85,0,0" VerticalAlignment="Top" Width="135" />
+        <Label x:Name="Lbl_ChaineConnexion" Content="Chaîne de connexion" HorizontalAlignment="Left" Margin="30,47,0,0" VerticalAlignment="Top" Width="135" />
+        <TextBox x:Name="Txt_Chaineconnexion" HorizontalAlignment="Left" Height="23" Margin="188,49,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="459" />
+        <Label x:Name="Lbl_ChoixLanguage" Content="language" HorizontalAlignment="Left" Margin="33,13,0,0" VerticalAlignment="Top" Width="135" />
+        <ComboBox x:Name="Cmb_Language" ItemsSource="{Binding Path=Language}" SelectedValue="{Binding Path=Language}" HorizontalAlignment="Left" Margin="188,17,0,0" VerticalAlignment="Top" Width="163" />
+    </Grid>
+</UserControl>
