@@ -30,7 +30,7 @@ namespace GenerateORM
         {
             DataConnexionViewModel DataConnexionObject = new DataConnexionViewModel();
             DataConnexionObject.LoadCmdLanguage();
-
+            string s = "";
             foreach (var item in DataConnexionObject.LanguagesLoad)
             {
                 usr_Control_Connexion_BDD.Cmb_Language.ItemsSource = item.Language;
