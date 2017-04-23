@@ -19,7 +19,7 @@ namespace GenerateORM.ViewModel
         public void LoadCmdLanguage()
         {
             ObservableCollection<DataConnexionModel> languagePack = new ObservableCollection<DataConnexionModel>();
-            languagePack.Add(new DataConnexionModel { Language = Enum.GetValues(typeof(Model.ChoixLanguage)).Cast<Model.ChoixLanguage>().ToList() });
+            languagePack.Add(new DataConnexionModel { Language = Enum.GetValues(typeof(Model.ChoixLanguage)).Cast<Model.ChoixLanguage>().ToList(), Type_Bdd = Enum.GetValues(typeof(Model.Type_De_Bdd)).Cast<Model.Type_De_Bdd>().ToList() });
             LanguagesLoad = languagePack;
         }
     }

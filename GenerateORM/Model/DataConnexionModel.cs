@@ -9,11 +9,28 @@ namespace GenerateORM.Model
 {
     public enum ChoixLanguage { Csharp, Php };
 
+    public enum Type_De_Bdd { Sql, MySql };
+
     public class DataConnexionModel : INotifyPropertyChanged
 
     {
         private ChoixLanguage choixBdd;
         private List<ChoixLanguage> language;
+        private List<Type_De_Bdd> type_bdd;
+
+        public List<Type_De_Bdd> Type_Bdd
+        {
+            get { return type_bdd; }
+
+            set
+            {
+                if (type_bdd != value)
+                {
+                    type_bdd = value;
+                    RaisePropertyChanged("Type_Bdd");
+                }
+            }
+        }
 
         public ChoixLanguage ChoixBddVal
         {

@@ -30,13 +30,14 @@ namespace GenerateORM
         {
             DataConnexionViewModel DataConnexionObject = new DataConnexionViewModel();
             DataConnexionObject.LoadCmdLanguage();
-            string s = "";
+
             foreach (var item in DataConnexionObject.LanguagesLoad)
             {
                 usr_Control_Connexion_BDD.Cmb_Language.ItemsSource = item.Language;
+                usr_Control_Connexion_BDD.Cmb_Type_Bdd.ItemsSource = item.Type_Bdd;
             }
-            //usr_Control_Connexion_BDD.Cmb_Language.ItemsSource = DataConnexionObject.LanguagesLoad.Select(s => s.Language);
-            //usr_Control_Connexion_BDD.Cmb_Language.ItemsSource = Enum.GetValues(typeof(Model.ChoixLanguage)).Cast<Model.ChoixLanguage>();
+            usr_Control_Connexion_BDD.Cmb_Type_Bdd.SelectedIndex = 0;
+            usr_Control_Connexion_BDD.Cmb_Language.SelectedIndex = 0;
         }
     }
 }
