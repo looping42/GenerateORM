@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Interface\IDataConnexionModel.cs" />
     <Compile Include="Views\usr_Control_Connexion_BDD.xaml.cs">
       <DependentUpon>usr_Control_Connexion_BDD.xaml</DependentUpon>
     </Compile>

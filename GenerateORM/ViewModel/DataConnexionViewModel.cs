@@ -1,4 +1,5 @@
 ﻿using GenerateORM.Model;
+using GenerateORM.ViewModel.Interface;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace GenerateORM.ViewModel
 {
-    public class DataConnexionViewModel : INotifyPropertyChanged
+    public class DataConnexionViewModel : INotifyPropertyChanged, IDataConnexionModel
     {
         //public DataConnexionViewModel()
         //{
         //    LoadCmdLanguage();
         //}
 
-        public ObservableCollection<DataConnexionModel> LanguagesLoad
-        {
-            get;
-            set;
-        }
+        //public ObservableCollection<DataConnexionModel> LanguagesLoad
+        //{
+        //    get;
+        //    set;
+        //}
 
         //public void LoadCmdLanguage()
         //{
