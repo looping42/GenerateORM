@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GenerateORM.Views
+namespace GenerateORM
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,22 +24,19 @@ namespace GenerateORM.Views
         public MainWindow()
         {
             InitializeComponent();
-            //this.DataContext = new GenerateORM.ViewModel.DataConnexionViewModel();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             DataConnexionViewModel DataConnexionObject = new DataConnexionViewModel();
             DataConnexionObject.LoadCmdLanguage();
-
+            string s = "";
             foreach (var item in DataConnexionObject.LanguagesLoad)
             {
                 usr_Control_Connexion_BDD.Cmb_Language.ItemsSource = item.Language;
-                usr_Control_Connexion_BDD.Cmb_Language.SelectedIndex = 0;
-                usr_Control_Connexion_BDD.Cmb_TypeBdd.ItemsSource = item.TypeBdd;
             }
-            usr_Control_Connexion_BDD.Cmb_Language.SelectedIndex = 0;
-            usr_Control_Connexion_BDD.Cmb_TypeBdd.SelectedIndex = 0;
+            //usr_Control_Connexion_BDD.Cmb_Language.ItemsSource = DataConnexionObject.LanguagesLoad.Select(s => s.Language);
+            //usr_Control_Connexion_BDD.Cmb_Language.ItemsSource = Enum.GetValues(typeof(Model.ChoixLanguage)).Cast<Model.ChoixLanguage>();
         }
     }
 }

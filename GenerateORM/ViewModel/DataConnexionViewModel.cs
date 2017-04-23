@@ -10,11 +10,6 @@ namespace GenerateORM.ViewModel
 {
     public class DataConnexionViewModel
     {
-        //public DataConnexionViewModel()
-        //{
-        //    LoadCmdLanguage();
-        //}
-
         public ObservableCollection<DataConnexionModel> LanguagesLoad
         {
             get;
@@ -24,7 +19,7 @@ namespace GenerateORM.ViewModel
         public void LoadCmdLanguage()
         {
             ObservableCollection<DataConnexionModel> languagePack = new ObservableCollection<DataConnexionModel>();
-            languagePack.Add(new DataConnexionModel { Language = Enum.GetValues(typeof(Model.ChoixLanguage)).Cast<Model.ChoixLanguage>().ToList(), TypeBdd = Enum.GetValues(typeof(Model.Type_Bdd)).Cast<Model.Type_Bdd>().ToList() });
+            languagePack.Add(new DataConnexionModel { Language = Enum.GetValues(typeof(Model.ChoixLanguage)).Cast<Model.ChoixLanguage>().ToList() });
             LanguagesLoad = languagePack;
         }
     }

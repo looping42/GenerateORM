@@ -67,7 +67,7 @@
     <Compile Include="Views\usr_Control_Connexion_BDD.xaml.cs">
       <DependentUpon>usr_Control_Connexion_BDD.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\GenerateOrmIndex.xaml">
+    <Page Include="GenerateOrmIndex.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -76,7 +76,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Csharp\Class1.cs" />
-    <Compile Include="Views\GenerateOrmIndex.xaml.cs">
+    <Compile Include="GenerateOrmIndex.xaml.cs">
       <DependentUpon>GenerateOrmIndex.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
