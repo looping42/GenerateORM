@@ -11,66 +11,16 @@ namespace GenerateORM.Model
 
     public enum Type_De_Bdd { Sql, MySql };
 
-    public class DataConnexionModel : INotifyPropertyChanged
-
+    public class DataConnexionModel
     {
-        private ChoixLanguage choixBdd;
-        private List<ChoixLanguage> language;
-        private List<Type_De_Bdd> type_bdd;
-
         public List<Type_De_Bdd> Type_Bdd
         {
-            get { return type_bdd; }
-
-            set
-            {
-                if (type_bdd != value)
-                {
-                    type_bdd = value;
-                    RaisePropertyChanged("Type_Bdd");
-                }
-            }
-        }
-
-        public ChoixLanguage ChoixBddVal
-        {
-            get
-            {
-                return choixBdd;
-            }
-
-            set
-            {
-                if (choixBdd != value)
-                {
-                    choixBdd = value;
-                    RaisePropertyChanged("ChoixBdd");
-                }
-            }
+            get { return Enum.GetValues(typeof(Model.Type_De_Bdd)).Cast<Model.Type_De_Bdd>().ToList(); }
         }
 
         public List<ChoixLanguage> Language
         {
-            get { return language; }
-
-            set
-            {
-                if (language != value)
-                {
-                    language = value;
-                    RaisePropertyChanged("Language");
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            get { return Enum.GetValues(typeof(Model.ChoixLanguage)).Cast<Model.ChoixLanguage>().ToList(); }
         }
     }
 }

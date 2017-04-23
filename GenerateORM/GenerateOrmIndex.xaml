@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GenerateORM"
         xmlns:views = "clr-namespace:GenerateORM.Views"
+
         mc:Ignorable="d"
         Title="MainWindow" Height="378.524" Width="703.084">
+
     <Grid>
         <views:usr_Control_Connexion_BDD x:Name = "usr_Control_Connexion_BDD" Loaded = "UserControl_Loaded" />
     </Grid>

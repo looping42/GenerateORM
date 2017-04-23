@@ -28,14 +28,6 @@ namespace GenerateORM
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            DataConnexionViewModel DataConnexionObject = new DataConnexionViewModel();
-            DataConnexionObject.LoadCmdLanguage();
-
-            foreach (var item in DataConnexionObject.LanguagesLoad)
-            {
-                usr_Control_Connexion_BDD.Cmb_Language.ItemsSource = item.Language;
-                usr_Control_Connexion_BDD.Cmb_Type_Bdd.ItemsSource = item.Type_Bdd;
-            }
             usr_Control_Connexion_BDD.Cmb_Type_Bdd.SelectedIndex = 0;
             usr_Control_Connexion_BDD.Cmb_Language.SelectedIndex = 0;
         }

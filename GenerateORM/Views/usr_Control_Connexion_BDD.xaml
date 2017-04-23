@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GenerateORM.Views"
+             xmlns:viewModel = "clr-namespace:GenerateORM.Model"
              mc:Ignorable="d"
              d:DesignHeight="140" d:DesignWidth="700">
+    <UserControl.DataContext>
+        <viewModel:DataConnexionModel />
+    </UserControl.DataContext>
     <Grid>
         <ComboBox x:Name="Cmb_ChoixBdd"  ItemsSource="{Binding Path=ChoixBdd}" SelectedValue="{Binding Path=ChoixBdd}" HorizontalAlignment="Left" Margin="188,85,0,0" VerticalAlignment="Top" Width="163" Height="26" />
         <Label x:Name="Lbl_ChoixBdd" Content="Choix de la BDD" HorizontalAlignment="Left" Margin="33,85,0,0" VerticalAlignment="Top" Width="135" />
