@@ -4,20 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GenerateORM.Views"
-             xmlns:viewModel = "clr-namespace:GenerateORM.Model"
+             xmlns:viewModel="clr-namespace:GenerateORM.ViewModel"
              mc:Ignorable="d"
              d:DesignHeight="140" d:DesignWidth="700">
     <UserControl.DataContext>
-        <viewModel:DataConnexionModel />
+        <viewModel:DataConnexionViewModel />
     </UserControl.DataContext>
     <Grid>
-        <ComboBox x:Name="Cmb_ChoixBdd"  ItemsSource="{Binding Path=ChoixBdd}" SelectedValue="{Binding Path=ChoixBdd}" HorizontalAlignment="Left" Margin="188,85,0,0" VerticalAlignment="Top" Width="163" Height="26" />
+        <ComboBox x:Name="Cmb_ChoixBdd"  ItemsSource="{Binding Path=ChoixBdd}"  HorizontalAlignment="Left" Margin="188,85,0,0" VerticalAlignment="Top" Width="163" Height="26" />
         <Label x:Name="Lbl_ChoixBdd" Content="Choix de la BDD" HorizontalAlignment="Left" Margin="33,85,0,0" VerticalAlignment="Top" Width="135" />
         <Label x:Name="Lbl_ChaineConnexion" Content="Chaîne de connexion" HorizontalAlignment="Left" Margin="30,47,0,0" VerticalAlignment="Top" Width="135" />
-        <TextBox x:Name="Txt_Chaineconnexion" HorizontalAlignment="Left" Height="23" Margin="188,49,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="459" />
+        <TextBox x:Name="Txt_Chaineconnexion" HorizontalAlignment="Left" Height="23" Margin="188,49,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="336" />
         <Label x:Name="Lbl_ChoixLanguage" Content="language" HorizontalAlignment="Left" Margin="33,13,0,0" VerticalAlignment="Top" Width="135" />
-        <ComboBox x:Name="Cmb_Type_Bdd" ItemsSource="{Binding Path=Type_Bdd}"  HorizontalAlignment="Left" Margin="484,17,0,0" VerticalAlignment="Top" Width="163" />
-        <ComboBox x:Name="Cmb_Language" ItemsSource="{Binding Path=Language}"  HorizontalAlignment="Left" Margin="188,17,0,0" VerticalAlignment="Top" Width="163" />
+        <ComboBox x:Name="Cmb_Type_Bdd" ItemsSource="{Binding Path=Type_Bdd}"  SelectedValue="{Binding Path=Type_bddSelected}"  HorizontalAlignment="Left" Margin="484,17,0,0" VerticalAlignment="Top" Width="163" />
+        <ComboBox x:Name="Cmb_Language" ItemsSource="{Binding Path=Language}"  SelectedValue="{Binding Path=ChoixLanguageSelected}"  HorizontalAlignment="Left" Margin="188,17,0,0" VerticalAlignment="Top" Width="163" />
         <Label x:Name="Lbl_Type_Bdd" Content="Type de Bdd" HorizontalAlignment="Left" Margin="368,17,0,0" VerticalAlignment="Top" Width="111" RenderTransformOrigin="0.919,0.385" />
+        <Button x:Name="Btn_LoadBddtable"  Content="Charger les Tables" HorizontalAlignment="Left" Margin="540,51,0,0" VerticalAlignment="Top" Width="107" RenderTransformOrigin="0.307,0.045" Click="Btn_LoadBddtable_Click" />
     </Grid>
 </UserControl>

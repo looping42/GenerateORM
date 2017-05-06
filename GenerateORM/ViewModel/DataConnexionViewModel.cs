@@ -10,35 +10,57 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GenerateORM.ViewModel
+
 {
     public class DataConnexionViewModel : INotifyPropertyChanged, IDataConnexionModel
     {
-        //public DataConnexionViewModel()
+        //public void ChargeClient()
         //{
-        //    LoadCmdLanguage();
+        //    LoadConnexion service = new LoadConnexion();
+        //    ConnexionBdd client = service.Charger();
         //}
 
-        //public ObservableCollection<DataConnexionModel> LanguagesLoad
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public void LoadCmdLanguage()
-        //{
-        //    ObservableCollection<DataConnexionModel> languagePack = new ObservableCollection<DataConnexionModel>();
-        //    languagePack.Add(new DataConnexionModel { Language = Enum.GetValues(typeof(Model.ChoixLanguage)).Cast<Model.ChoixLanguage>().ToList(), Type_Bdd = Enum.GetValues(typeof(Model.Type_De_Bdd)).Cast<Model.Type_De_Bdd>().ToList() });
-        //    LanguagesLoad = languagePack;
-        //}
-
-        private ChoixLanguage choixBdd;
+        private Type_De_Bdd type_bddSelected;
+        private ChoixLanguage choixLanguageSelected;
+        private string choixBdd;
         private List<ChoixLanguage> language;
         private List<Type_De_Bdd> type_bdd;
 
+        public Type_De_Bdd Type_bddSelected
+        {
+            get
+            {
+                return type_bddSelected;
+            }
+            set
+            {
+                if (type_bddSelected != value)
+                {
+                    type_bddSelected = value;
+                    NotifyPropertyChanged(ref type_bddSelected, value);
+                }
+            }
+        }
+
+        public ChoixLanguage ChoixLanguageSelected
+        {
+            get
+            {
+                return choixLanguageSelected;
+            }
+            set
+            {
+                if (choixLanguageSelected != value)
+                {
+                    choixLanguageSelected = value;
+                    NotifyPropertyChanged(ref choixLanguageSelected, value);
+                }
+            }
+        }
+
         public List<Type_De_Bdd> Type_Bdd
         {
-            get { return type_bdd; }
-
+            get { return Enum.GetValues(typeof(ViewModel.Type_De_Bdd)).Cast<ViewModel.Type_De_Bdd>().ToList(); }
             set
             {
                 if (type_bdd != value)
@@ -49,7 +71,7 @@ namespace GenerateORM.ViewModel
             }
         }
 
-        public ChoixLanguage ChoixBddVal
+        public string ChoixBddVal
         {
             get
             {
@@ -68,7 +90,7 @@ namespace GenerateORM.ViewModel
 
         public List<ChoixLanguage> Language
         {
-            get { return language; }
+            get { return Enum.GetValues(typeof(ViewModel.ChoixLanguage)).Cast<ViewModel.ChoixLanguage>().ToList(); }
 
             set
             {

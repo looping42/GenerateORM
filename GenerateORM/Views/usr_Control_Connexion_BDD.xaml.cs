@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GenerateORM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,14 @@ namespace GenerateORM.Views
         public usr_Control_Connexion_BDD()
         {
             InitializeComponent();
+            //dataconnexion.ChargeClient();
+        }
+
+        private void Btn_LoadBddtable_Click(object sender, RoutedEventArgs e)
+        {
+            var t = this.DataContext;
+            //var test1 = test.ChoixBddVal;
+            //var t = this.DataContext;
         }
     }
 }

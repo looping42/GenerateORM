@@ -21,9 +21,12 @@ namespace GenerateORM
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DataConnexionViewModel dataConnexionViewModel = new DataConnexionViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = dataConnexionViewModel;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
