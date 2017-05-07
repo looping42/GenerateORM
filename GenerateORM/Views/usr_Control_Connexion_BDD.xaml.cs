@@ -1,6 +1,8 @@
 ﻿using GenerateORM.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.SqlServer.Management.Smo;
+using GenerateORM.Model;
 
 namespace GenerateORM.Views
 {
@@ -24,14 +28,29 @@ namespace GenerateORM.Views
         public usr_Control_Connexion_BDD()
         {
             InitializeComponent();
-            //dataconnexion.ChargeClient();
+            DataContext = new DataConnexionViewModel();
         }
 
-        private void Btn_LoadBddtable_Click(object sender, RoutedEventArgs e)
+        private void Btn_LoadBddtable_Click_1(object sender, RoutedEventArgs e)
         {
-            var t = this.DataContext;
-            //var test1 = test.ChoixBddVal;
-            //var t = this.DataContext;
+            if (string.IsNullOrEmpty(Txt_Chaineconnexion.Text))
+            {
+            }
+            Cmb_ChoixBdd.ItemsSource = new DatabaseData().GetDatabaseNames(Txt_Chaineconnexion.Text);
         }
+
+        ///// <summary>
+        ///// Récupére toute les bases de données correspondant au serveur passé en paramétres
+        ///// </summary>
+        ///// <param name = "serverName" ></ param >
+        ///// < returns ></ returns >
+        //public static string[] GetDatabaseNames(string serverName)
+        //{
+        //    var server = new Server(serverName);
+        //    return (from Database database in server.Databases
+        //            where !database.IsSystemObject && !database.IsDatabaseSnapshot
+        //            select database.Name
+        //           ).ToArray();
+        //}
     }
 }
