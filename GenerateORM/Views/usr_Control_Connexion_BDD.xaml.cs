@@ -37,20 +37,7 @@ namespace GenerateORM.Views
             {
             }
             Cmb_ChoixBdd.ItemsSource = new DatabaseData().GetDatabaseNames(Txt_Chaineconnexion.Text);
+            Cmb_ChoixBdd.SelectedIndex = 0;
         }
-
-        ///// <summary>
-        ///// Récupére toute les bases de données correspondant au serveur passé en paramétres
-        ///// </summary>
-        ///// <param name = "serverName" ></ param >
-        ///// < returns ></ returns >
-        //public static string[] GetDatabaseNames(string serverName)
-        //{
-        //    var server = new Server(serverName);
-        //    return (from Database database in server.Databases
-        //            where !database.IsSystemObject && !database.IsDatabaseSnapshot
-        //            select database.Name
-        //           ).ToArray();
-        //}
     }
 }

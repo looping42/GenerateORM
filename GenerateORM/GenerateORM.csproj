@@ -69,8 +69,12 @@
     <Compile Include="Model\ConnexionBdd.cs" />
     <Compile Include="Model\DatabaseData.cs" />
     <Compile Include="Model\LoadConnexion.cs" />
-    <Compile Include="RelayCommand.cs" />
+    <Compile Include="Model\SqlTable.cs" />
     <Compile Include="ViewModel\Interface\IDataConnexionModel.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="Views\Table.xaml.cs">
+      <DependentUpon>Table.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\usr_Control_Connexion_BDD.xaml.cs">
       <DependentUpon>usr_Control_Connexion_BDD.xaml</DependentUpon>
     </Compile>
@@ -87,6 +91,10 @@
       <DependentUpon>GenerateOrmIndex.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Table.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\usr_Control_Connexion_BDD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

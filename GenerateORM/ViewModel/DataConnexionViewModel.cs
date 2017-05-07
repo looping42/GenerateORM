@@ -1,5 +1,6 @@
 ﻿using GenerateORM.Model;
 using GenerateORM.ViewModel.Interface;
+using GenerateORM.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,8 +25,6 @@ namespace GenerateORM.ViewModel
         private string _txtChaineConnexion;
         private Type_De_Bdd type_bddSelected;
         private ChoixLanguage choixLanguageSelected;
-
-        //private string[] _choixBdd;
         private List<ChoixLanguage> language;
 
         private List<Type_De_Bdd> type_bdd;
@@ -74,28 +73,6 @@ namespace GenerateORM.ViewModel
                 }
             }
         }
-
-        /// <summary>
-        ///
-        /// </summary>
-        //public string[] ChoixBdd
-        //{
-        //    get
-        //    {
-        //        if (!string.IsNullOrEmpty(_txtChaineConnexion))
-        //            return new DatabaseData().GetDatabaseNames(_txtChaineConnexion);
-        //        else
-        //            return new string[0];
-        //    }
-        //    set
-        //    {
-        //        if (_choixBdd != value)
-        //        {
-        //            _choixBdd = value;
-        //            NotifyPropertyChanged(ref _choixBdd, value);
-        //        }
-        //    }
-        //}
 
         public string TxtChaineConnexion
         {
@@ -166,20 +143,6 @@ namespace GenerateORM.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(nomPropriete));
         }
 
-        //private RelayCommand _loadBddTable;
-
-        //public ICommand LoadBddTable
-        //{
-        //    get
-        //    {
-        //        if (_loadBddTable == null)
-        //        {
-        //            _loadBddTable = new RelayCommand(param => this.LoadChoixBdd());
-        //        }
-        //        return _loadBddTable;
-        //    }
-        //}
-
         private RelayCommand _clickShowTable;
 
         public ICommand ClickShowTable
@@ -196,69 +159,15 @@ namespace GenerateORM.ViewModel
 
         private void LoadChoixBdd()
         {
-            //if (string.IsNullOrEmpty(_txtChaineConnexion))
             string test1 = _bddSelected;
             string test = _txtChaineConnexion;
-            //_choixBdd =
-            // Save command execution logic
+            string con = string.Format(Properties.Settings.Default.ConnectionModel, _txtChaineConnexion, _bddSelected);
+
+            SqlTable sqlTable = new SqlTable(con);
+            List<string> tableSql = sqlTable.Gettable();
+
+            Table hostWindow = new Table(con);
+            hostWindow.Show();
         }
-    }
-
-    public class RelayCommand : ICommand
-    {
-        #region Fields
-
-        private readonly Action<object> _execute;
-        private readonly Predicate<object> _canExecute;
-
-        #endregion Fields
-
-        #region Constructors
-
-        /// <summary>
-        /// Creates a new command that can always execute.
-        /// </summary>
-        /// <param name="execute">The execution logic.</param>
-        public RelayCommand(Action<object> execute)
-            : this(execute, null)
-        {
-        }
-
-        /// <summary>
-        /// Creates a new command.
-        /// </summary>
-        /// <param name="execute">The execution logic.</param>
-        /// <param name="canExecute">The execution status logic.</param>
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
-        {
-            if (execute == null)
-                throw new ArgumentNullException("execute");
-
-            _execute = execute;
-            _canExecute = canExecute;
-        }
-
-        #endregion Constructors
-
-        #region ICommand Members
-
-        [DebuggerStepThrough]
-        public bool CanExecute(object parameters)
-        {
-            return _canExecute == null ? true : _canExecute(parameters);
-        }
-
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
-
-        public void Execute(object parameters)
-        {
-            _execute(parameters);
-        }
-
-        #endregion ICommand Members
     }
 }

@@ -68,5 +68,14 @@ namespace GenerateORM.Properties {
                 return ((string)(this["conbdd"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source={0};Initial Catalog={1};Integrated Security=True")]
+        public string ConnectionModel {
+            get {
+                return ((string)(this["ConnectionModel"]));
+            }
+        }
     }
 }
