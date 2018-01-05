@@ -5,12 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Dapper;
+using Dapper.Contrib;
+using Dapper.Contrib.Extensions;
 
 namespace GenerateORM.ViewModel
 
@@ -131,6 +135,7 @@ namespace GenerateORM.ViewModel
             if (object.Equals(variable, valeur)) return false;
 
             variable = valeur;
+
             NotifyPropertyChanged(nomPropriete);
             return true;
         }
@@ -164,10 +169,26 @@ namespace GenerateORM.ViewModel
             string con = string.Format(Properties.Settings.Default.ConnectionModel, _txtChaineConnexion, _bddSelected);
 
             SqlTable sqlTable = new SqlTable(con);
-            List<string> tableSql = sqlTable.Gettable();
+            sqlTable.CreateTableClass();
 
+            using (SqlConnection connection = new SqlConnection(con))
+            {
+                connection.Open();
+                List<User> user = new List<User>();
+                var identity = connection.Insert(user);
+                // Do work here; connection closed on following line.
+            }
             Table hostWindow = new Table(con);
             hostWindow.Show();
         }
+    }
+
+    public class User
+    {
+        [Key]
+        private int TheId { get; set; }
+
+        private string Name { get; set; }
+        private int Age { get; set; }
     }
 }
