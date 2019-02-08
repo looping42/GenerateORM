@@ -21,11 +21,11 @@ using GenerateORM.Model;
 namespace GenerateORM.Views
 {
     /// <summary>
-    /// Interaction logic for usr_Control_Connexion_BDD.xaml
+    /// Interaction logic for usr_Control_Connexion_BDD.xaml.
     /// </summary>
-    public partial class usr_Control_Connexion_BDD : UserControl
+    public partial class Usr_Control_Connexion_BDD : UserControl
     {
-        public usr_Control_Connexion_BDD()
+        public Usr_Control_Connexion_BDD()
         {
             InitializeComponent();
             DataContext = new DataConnexionViewModel();
@@ -36,7 +36,7 @@ namespace GenerateORM.Views
             if (string.IsNullOrEmpty(Txt_Chaineconnexion.Text))
             {
             }
-            Cmb_ChoixBdd.ItemsSource = new DatabaseData().GetDatabaseNames(Txt_Chaineconnexion.Text);
+            Cmb_ChoixBdd.ItemsSource = DatabaseData.GetDatabaseNames(Txt_Chaineconnexion.Text);
             Cmb_ChoixBdd.SelectedIndex = 0;
         }
     }

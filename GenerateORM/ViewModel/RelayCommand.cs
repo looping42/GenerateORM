@@ -12,44 +12,25 @@ namespace GenerateORM.ViewModel
     {
         #region Fields
 
-        private readonly Action<object> _execute;
-        private readonly Predicate<object> _canExecute;
+        private readonly Action<object> execute;
+        private readonly Predicate<object> canExecute;
 
         #endregion Fields
 
         #region Constructors
 
-        /// <summary>
-        /// Creates a new command that can always execute.
-        /// </summary>
-        /// <param name="execute">The execution logic.</param>
         public RelayCommand(Action<object> execute)
             : this(execute, null)
         {
         }
 
-        /// <summary>
-        /// Creates a new command.
-        /// </summary>
-        /// <param name="execute">The execution logic.</param>
-        /// <param name="canExecute">The execution status logic.</param>
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             if (execute == null)
-                throw new ArgumentNullException("execute");
+                throw new ArgumentNullException(nameof(execute));
 
-            _execute = execute;
-            _canExecute = canExecute;
-        }
-
-        #endregion Constructors
-
-        #region ICommand Members
-
-        [DebuggerStepThrough]
-        public bool CanExecute(object parameters)
-        {
-            return _canExecute == null ? true : _canExecute(parameters);
+            this.execute = execute;
+            this.canExecute = canExecute;
         }
 
         public event EventHandler CanExecuteChanged
@@ -58,9 +39,19 @@ namespace GenerateORM.ViewModel
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public void Execute(object parameters)
+        #endregion Constructors
+
+        #region ICommand Members
+
+        [DebuggerStepThrough]
+        public bool CanExecute(object parameter)
         {
-            _execute(parameters);
+            return canExecute == null ? true : canExecute(parameter);
+        }
+
+        public void Execute(object parameter)
+        {
+            execute(parameter);
         }
 
         #endregion ICommand Members

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenerateORM.ViewModel.Interface
+namespace GenerateORM.ViewModel.InterfaceOrm
 {
     public interface IDataConnexionModel
     {

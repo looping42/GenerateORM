@@ -10,6 +10,6 @@
         Title="MainWindow" Height="378.524" Width="703.084">
 
     <Grid>
-        <views:usr_Control_Connexion_BDD x:Name = "usr_Control_Connexion_BDD" Loaded = "UserControl_Loaded" Margin="10,10,10,148" />
+        <views:Usr_Control_Connexion_BDD x:Name = "usr_Control_Connexion_BDD" Loaded = "UserControl_Loaded" Margin="10,10,10,148" />
     </Grid>
 </Window>

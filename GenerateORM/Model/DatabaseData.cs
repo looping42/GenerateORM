@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace GenerateORM.Model
 {
-    public class DatabaseData
+    public static class DatabaseData
     {
         /// <summary>
-        /// Récupére toute les bases de données correspondant au serveur passé en paramétres
+        /// Récupére toute les bases de données correspondant au serveur passé en paramétres.
         /// </summary>
-        /// <param name="serverName"></param>
-        /// <returns></returns>
-        public string[] GetDatabaseNames(string serverName)
+        /// <param name="serverName">serveur</param>
+        /// <returns>array of string</returns>
+        public static string[] GetDatabaseNames(string serverName)
         {
             var server = new Server(serverName);
             return (from Database database in server.Databases
@@ -23,7 +23,7 @@ namespace GenerateORM.Model
                    ).ToArray();
         }
 
-        public string GetServiceIfEmpty()
+        public static string GetServiceIfEmpty()
         {
             var server = new Server();
             return server.Name;

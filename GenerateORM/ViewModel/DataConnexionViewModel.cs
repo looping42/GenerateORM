@@ -1,5 +1,5 @@
 ﻿using GenerateORM.Model;
-using GenerateORM.ViewModel.Interface;
+using GenerateORM.ViewModel.InterfaceOrm;
 using GenerateORM.Views;
 using System;
 using System.Collections.Generic;
@@ -17,34 +17,35 @@ using Dapper.Contrib;
 using Dapper.Contrib.Extensions;
 
 namespace GenerateORM.ViewModel
-
 {
     public class DataConnexionViewModel : INotifyPropertyChanged, IDataConnexionModel
     {
+        private string bddSelected;
+        private string txtChaineConnexion;
+        private Type_De_Bdd typebddSelected;
+        private ChoixLanguage choixLanguageSelected;
+        private List<ChoixLanguage> language;
+        private List<Type_De_Bdd> typebdd;
+        private RelayCommand clickShowTable;
+
         public DataConnexionViewModel()
         {
         }
 
-        private string bddSelected;
-        private string txtChaineConnexion;
-        private Type_De_Bdd type_bddSelected;
-        private ChoixLanguage choixLanguageSelected;
-        private List<ChoixLanguage> language;
-
-        private List<Type_De_Bdd> type_bdd;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Type_De_Bdd Type_bddSelected
         {
             get
             {
-                return type_bddSelected;
+                return typebddSelected;
             }
             set
             {
-                if (type_bddSelected != value)
+                if (typebddSelected != value)
                 {
-                    type_bddSelected = value;
-                    NotifyPropertyChanged(ref type_bddSelected, value);
+                    typebddSelected = value;
+                    NotifyPropertyChanged(ref typebddSelected, value);
                 }
             }
         }
@@ -73,10 +74,10 @@ namespace GenerateORM.ViewModel
             }
             set
             {
-                if (type_bdd != value)
+                if (typebdd != value)
                 {
-                    type_bdd = value;
-                    NotifyPropertyChanged(ref type_bdd, value);
+                    typebdd = value;
+                    NotifyPropertyChanged(ref typebdd, value);
                 }
             }
         }
@@ -87,7 +88,7 @@ namespace GenerateORM.ViewModel
             {
                 if (string.IsNullOrEmpty(txtChaineConnexion))
                 {
-                    txtChaineConnexion = new DatabaseData().GetServiceIfEmpty();
+                    txtChaineConnexion = DatabaseData.GetServiceIfEmpty();
                 }
                 return txtChaineConnexion;
             }
@@ -121,7 +122,10 @@ namespace GenerateORM.ViewModel
 
         public List<ChoixLanguage> Language
         {
-            get { return Enum.GetValues(typeof(ViewModel.ChoixLanguage)).Cast<ViewModel.ChoixLanguage>().ToList(); }
+            get
+            {
+                return Enum.GetValues(typeof(ViewModel.ChoixLanguage)).Cast<ViewModel.ChoixLanguage>().ToList();
+            }
 
             set
             {
@@ -133,17 +137,17 @@ namespace GenerateORM.ViewModel
             }
         }
 
-        private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
+        public ICommand ClickShowTable
         {
-            if (object.Equals(variable, valeur)) return false;
-
-            variable = valeur;
-
-            NotifyPropertyChanged(nomPropriete);
-            return true;
+            get
+            {
+                if (clickShowTable == null)
+                {
+                    clickShowTable = new RelayCommand(param => this.LoadChoixBdd());
+                }
+                return clickShowTable;
+            }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged(string nomPropriete)
         {
@@ -151,18 +155,16 @@ namespace GenerateORM.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(nomPropriete));
         }
 
-        private RelayCommand _clickShowTable;
-
-        public ICommand ClickShowTable
+        private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
         {
-            get
+            if (object.Equals(variable, valeur))
             {
-                if (_clickShowTable == null)
-                {
-                    _clickShowTable = new RelayCommand(param => this.LoadChoixBdd());
-                }
-                return _clickShowTable;
+                return false;
             }
+            variable = valeur;
+
+            NotifyPropertyChanged(nomPropriete);
+            return true;
         }
 
         private void LoadChoixBdd()

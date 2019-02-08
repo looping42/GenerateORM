@@ -1,4 +1,4 @@
-﻿using GenerateORM.ViewModel.Interface;
+﻿using GenerateORM.ViewModel.InterfaceOrm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,12 +8,19 @@ using System.Threading.Tasks;
 
 namespace GenerateORM.ViewModel
 {
-    public enum ChoixLanguage { Csharp, Php };
+    public enum ChoixLanguage
+    {
+        Csharp,
+        Php,
+    }
 
-    public enum Type_De_Bdd { Sql, MySql };
+    public enum Type_De_Bdd
+    {
+        Sql,
+        MySql,
+    }
 
     public class DataConnexionLoadModel : IDataConnexionModel
-
     {
         public List<Type_De_Bdd> Type_Bdd
         {

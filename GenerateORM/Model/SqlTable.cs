@@ -13,59 +13,7 @@ namespace GenerateORM.Model
         private string con = string.Empty;
         private string selecttable = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'";
 
-        public SqlTable(string con)
-        {
-            this.con = con;
-        }
-
-        public void CreateTableClass()
-        {
-            this.GenerateSqlTable(this.Gettable());
-        }
-
-        private List<string> Gettable()
-        {
-            List<string> table = new List<string>();
-            using (SqlConnection con = null)
-            {
-                con.Open();
-
-                using (SqlCommand command = new SqlCommand(selecttable, con))
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        table.Add(reader.GetString(0));
-                    }
-                }
-            }
-            return table;
-        }
-
-        private string GenerateSqlTable(List<string> tableToExport)
-        {
-            string table = string.Empty;
-            using (SqlConnection con = new SqlConnection())
-            {
-                con.Open();
-
-                foreach (string tableUnique in tableToExport)
-                {
-                    SqlCommand command = new SqlCommand(string.Format(SqlRquestTableUNique, "new_loto"), con);
-                    command.Parameters.AddWithValue("@TableNameParam", tableUnique);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            table += reader["getter"].ToString() + Environment.NewLine;
-                        }
-                    }
-                }
-            }
-            return table;
-        }
-
-        private string SqlRquestTableUNique = @"select 'public ' + ColumnType + ' ' + ColumnName + ' {{ get; set; }}'as getter
+        private string sqlRquestTableUNique = @"select 'public ' + ColumnType + ' ' + ColumnName + ' {{ get; set; }}'as getter
 from
 (
     select
@@ -118,5 +66,57 @@ from
     where object_id = object_id('{0}')
 ) t
 order by column_id";
+
+        public SqlTable(string con)
+        {
+            this.con = con;
+        }
+
+        public void CreateTableClass()
+        {
+            this.GenerateSqlTable(this.Gettable());
+        }
+
+        private List<string> Gettable()
+        {
+            List<string> table = new List<string>();
+            using (SqlConnection con = null)
+            {
+                con.Open();
+
+                using (SqlCommand command = new SqlCommand(selecttable, con))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        table.Add(reader.GetString(0));
+                    }
+                }
+            }
+            return table;
+        }
+
+        private string GenerateSqlTable(List<string> tableToExport)
+        {
+            string table = string.Empty;
+            using (SqlConnection con = new SqlConnection())
+            {
+                con.Open();
+
+                foreach (string tableUnique in tableToExport)
+                {
+                    SqlCommand command = new SqlCommand(string.Format(sqlRquestTableUNique, "new_loto"), con);
+                    command.Parameters.AddWithValue("@TableNameParam", tableUnique);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            table += reader["getter"].ToString() + Environment.NewLine;
+                        }
+                    }
+                }
+            }
+            return table;
+        }
     }
 }
