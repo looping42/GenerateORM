@@ -33,11 +33,11 @@ namespace GenerateORM.Views
 
         private void Btn_LoadBddtable_Click_1(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(Txt_Chaineconnexion.Text))
+            if (!string.IsNullOrEmpty(Txt_Chaineconnexion.Text))
             {
+                Cmb_ChoixBdd.ItemsSource = DatabaseData.GetDatabaseNames(Txt_Chaineconnexion.Text);
+                Cmb_ChoixBdd.SelectedIndex = 0;
             }
-            Cmb_ChoixBdd.ItemsSource = DatabaseData.GetDatabaseNames(Txt_Chaineconnexion.Text);
-            Cmb_ChoixBdd.SelectedIndex = 0;
         }
     }
 }

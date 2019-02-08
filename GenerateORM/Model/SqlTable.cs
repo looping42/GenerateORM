@@ -21,9 +21,9 @@ namespace GenerateORM.Model
             this.selectGetterSetterTable = selectGetterSetterTable;
         }
 
-        public void CreateTableClass()
+        public List<StringBuilder> CreateTableClass()
         {
-            this.GenerateSqlTable(this.Gettable());
+            return this.GenerateSqlTable(this.Gettable());
         }
 
         private List<string> Gettable()

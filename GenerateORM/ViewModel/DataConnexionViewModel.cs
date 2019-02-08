@@ -177,14 +177,21 @@ namespace GenerateORM.ViewModel
             SqlTable sqlTable = new SqlTable(con, SqlForSearchTableAndColumn.GetTable, SqlForSearchTableAndColumn.GetGetterSetter);
             sqlTable.CreateTableClass();
 
+            List<StringBuilder> tables = new List<StringBuilder>();
+
+            string path = TemporaryRepertory.CreateUniqueTempDirectory();
+            GenerateClass generateClass = new GenerateClass();
+            generateClass.CreateClass(tables, "test");
+            generateClass.GenerateCSharpCode(path);
             using (SqlConnection connection = new SqlConnection(con))
             {
                 connection.Open();
                 List<User> user = new List<User>();
                 var identity = connection.Insert(user);
             }
-            Table hostWindow = new Table(con);
-            hostWindow.Show();
+
+            //Table hostWindow = new Table(con);
+            //hostWindow.Show();
         }
     }
 
