@@ -15,6 +15,7 @@ using System.Windows.Input;
 using Dapper;
 using Dapper.Contrib;
 using Dapper.Contrib.Extensions;
+using Ressource;
 
 namespace GenerateORM.ViewModel
 {
@@ -173,7 +174,7 @@ namespace GenerateORM.ViewModel
             string test = txtChaineConnexion;
             string con = string.Format(Properties.Settings.Default.ConnectionModel, txtChaineConnexion, bddSelected);
 
-            SqlTable sqlTable = new SqlTable(con);
+            SqlTable sqlTable = new SqlTable(con, SqlForSearchTableAndColumn.GetTable, SqlForSearchTableAndColumn.GetGetterSetter);
             sqlTable.CreateTableClass();
 
             using (SqlConnection connection = new SqlConnection(con))
@@ -181,7 +182,6 @@ namespace GenerateORM.ViewModel
                 connection.Open();
                 List<User> user = new List<User>();
                 var identity = connection.Insert(user);
-                // Do work here; connection closed on following line.
             }
             Table hostWindow = new Table(con);
             hostWindow.Show();

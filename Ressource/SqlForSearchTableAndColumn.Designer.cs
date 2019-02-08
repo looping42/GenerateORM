@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GenerateORM.Properties {
+namespace Ressource {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace GenerateORM.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class SqlForSearchTableAndColumn {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal SqlForSearchTableAndColumn() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GenerateORM.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ressource.SqlForSearchTableAndColumn", typeof(SqlForSearchTableAndColumn).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,12 +51,44 @@ namespace GenerateORM.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select &apos;public &apos; + ColumnType + &apos; &apos; + ColumnName + &apos; {{ get; set; }}&apos;as getter
+        ///from
+        ///(
+        ///    select
+        ///        replace(col.name, &apos; &apos;, &apos;_&apos;) ColumnName,
+        ///        column_id,
+        ///        case typ.name
+        ///            when &apos;bigint&apos; then &apos;long&apos;
+        ///            when &apos;binary&apos; then &apos;byte[]&apos;
+        ///            when &apos;bit&apos; then &apos;bool&apos;
+        ///            when &apos;char&apos; then &apos;String&apos;
+        ///            when &apos;date&apos; then &apos;DateTime&apos;
+        ///            when &apos;datetime&apos; then &apos;DateTime&apos;
+        ///            when &apos;datetime2&apos; then &apos;DateTime&apos;
+        ///            when &apos;datetimeoffset [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string GetGetterSetter {
+            get {
+                return ResourceManager.GetString("GetGetterSetter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE=&apos;BASE TABLE&apos;.
+        /// </summary>
+        public static string GetTable {
+            get {
+                return ResourceManager.GetString("GetTable", resourceCulture);
             }
         }
     }
