@@ -23,6 +23,7 @@ namespace GenerateORM.ViewModel
     {
         public DataConnexionViewModel()
         {
+            var test = "";
         }
 
         private string _bddSelected;
