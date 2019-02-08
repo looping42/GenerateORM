@@ -10,12 +10,12 @@ namespace GenerateORM.Model
 {
     internal class SqlTable
     {
-        private string _con;
+        private string con = string.Empty;
         private string selecttable = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'";
 
         public SqlTable(string con)
         {
-            this._con = con;
+            this.con = con;
         }
 
         public void CreateTableClass()
@@ -26,7 +26,7 @@ namespace GenerateORM.Model
         private List<string> Gettable()
         {
             List<string> table = new List<string>();
-            using (SqlConnection con = new SqlConnection(_con))
+            using (SqlConnection con = null)
             {
                 con.Open();
 
@@ -44,43 +44,28 @@ namespace GenerateORM.Model
 
         private string GenerateSqlTable(List<string> tableToExport)
         {
-            string table = "";
-            using (SqlConnection con = new SqlConnection(_con))
+            string table = string.Empty;
+            using (SqlConnection con = new SqlConnection())
             {
                 con.Open();
 
                 foreach (string tableUnique in tableToExport)
                 {
-                    SqlCommand command = new SqlCommand(SqlRquestTableUNique, con);
+                    SqlCommand command = new SqlCommand(string.Format(SqlRquestTableUNique, "new_loto"), con);
                     command.Parameters.AddWithValue("@TableNameParam", tableUnique);
-
-                    //command.Parameters.AddWithValue("@result", SqlDbType.VarChar);
-                    //command.Parameters["@result"].Direction = ParameterDirection.Output;
-                    //var result = command.ExecuteNonQuery();
-                    //string name = (string)command.Parameters["@result"].Value;
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            table += reader.GetString(0);
-                            //string test = reader.GetString(1);
+                            table += reader["getter"].ToString() + Environment.NewLine;
                         }
                     }
-                    //SqlParameter retval = new SqlParameter("@result", SqlDbType.VarChar);
-                    //retval.Direction = ParameterDirection.ReturnValue;
-                    //string retunvalue = retval.Value.ToString();
                 }
             }
             return table;
         }
 
-        private string SqlRquestTableUNique = @"declare @TableName sysname = '@TableNameParam'
-declare @result varchar(max) = 'public class ' + @TableName + '
-{'
-;with cte (ColumnName,column_id,ColumnType,ColumnDesc)
-as
-(
-select ColumnName, column_id,ColumnType,ColumnDesc
+        private string SqlRquestTableUNique = @"select 'public ' + ColumnType + ' ' + ColumnName + ' {{ get; set; }}'as getter
 from
 (
     select
@@ -130,10 +115,8 @@ from
        AND
        minor_id = COLUMNPROPERTY(major_id, col.name, 'ColumnId')
     ) colDesc
-    where object_id = object_id(@TableName)
+    where object_id = object_id('{0}')
 ) t
---order by column_id
-)
-select  'public ' + ColumnType + ' ' + ColumnName + ' { get; set; }'   from cte order by column_id";
+order by column_id";
     }
 }

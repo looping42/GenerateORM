@@ -23,11 +23,10 @@ namespace GenerateORM.ViewModel
     {
         public DataConnexionViewModel()
         {
-            var test = "";
         }
 
-        private string _bddSelected;
-        private string _txtChaineConnexion;
+        private string bddSelected;
+        private string txtChaineConnexion;
         private Type_De_Bdd type_bddSelected;
         private ChoixLanguage choixLanguageSelected;
         private List<ChoixLanguage> language;
@@ -68,7 +67,10 @@ namespace GenerateORM.ViewModel
 
         public List<Type_De_Bdd> Type_Bdd
         {
-            get { return Enum.GetValues(typeof(ViewModel.Type_De_Bdd)).Cast<ViewModel.Type_De_Bdd>().ToList(); }
+            get
+            {
+                return Enum.GetValues(typeof(ViewModel.Type_De_Bdd)).Cast<ViewModel.Type_De_Bdd>().ToList();
+            }
             set
             {
                 if (type_bdd != value)
@@ -83,19 +85,19 @@ namespace GenerateORM.ViewModel
         {
             get
             {
-                if (string.IsNullOrEmpty(_txtChaineConnexion))
+                if (string.IsNullOrEmpty(txtChaineConnexion))
                 {
-                    _txtChaineConnexion = new DatabaseData().GetServiceIfEmpty();
+                    txtChaineConnexion = new DatabaseData().GetServiceIfEmpty();
                 }
-                return _txtChaineConnexion;
+                return txtChaineConnexion;
             }
 
             set
             {
-                if (_txtChaineConnexion != value)
+                if (txtChaineConnexion != value)
                 {
-                    _txtChaineConnexion = value;
-                    NotifyPropertyChanged(ref _txtChaineConnexion, value);
+                    txtChaineConnexion = value;
+                    NotifyPropertyChanged(ref txtChaineConnexion, value);
                 }
             }
         }
@@ -104,15 +106,15 @@ namespace GenerateORM.ViewModel
         {
             get
             {
-                return _bddSelected;
+                return bddSelected;
             }
 
             set
             {
-                if (_bddSelected != value)
+                if (bddSelected != value)
                 {
-                    _bddSelected = value;
-                    NotifyPropertyChanged(ref _bddSelected, value);
+                    bddSelected = value;
+                    NotifyPropertyChanged(ref bddSelected, value);
                 }
             }
         }
@@ -165,9 +167,9 @@ namespace GenerateORM.ViewModel
 
         private void LoadChoixBdd()
         {
-            string test1 = _bddSelected;
-            string test = _txtChaineConnexion;
-            string con = string.Format(Properties.Settings.Default.ConnectionModel, _txtChaineConnexion, _bddSelected);
+            string test1 = bddSelected;
+            string test = txtChaineConnexion;
+            string con = string.Format(Properties.Settings.Default.ConnectionModel, txtChaineConnexion, bddSelected);
 
             SqlTable sqlTable = new SqlTable(con);
             sqlTable.CreateTableClass();
