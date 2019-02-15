@@ -8,6 +8,7 @@ namespace GenerateORM.Model
 {
     public class BddTable
     {
-        public List<BddLine> bddLines { get; set; }
+        public string Name { get; set; }
+        public List<BddLine> BddLines { get; set; }
     }
 }

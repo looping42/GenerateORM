@@ -68,7 +68,8 @@ namespace GenerateORM.Model
                         }
                     }
                     BddTable bddTable = new BddTable();
-                    bddTable.bddLines = bddLines;
+                    bddTable.Name = tableUnique;
+                    bddTable.BddLines = bddLines;
                     bddTables.Add(bddTable);
                 }
             }

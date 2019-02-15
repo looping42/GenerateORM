@@ -139,7 +139,7 @@ from
             when 'int' then 'int'
             when 'money' then 'decimal'
             when 'nchar' then 'char'
-            when 'ntext' then 'string'
+            when 'ntext' then 'String'
             when 'numeric' then 'decimal'
             when 'nvarchar' then 'String'
             when 'real' then 'double'
@@ -152,7 +152,7 @@ from
             when 'tinyint' then 'byte'
             when 'uniqueidentifier' then 'Guid'
             when 'varbinary' then 'byte[]'
-            when 'varchar' then 'string'
+            when 'varchar' then 'String'
             else 'UNKNOWN_' + typ.name
         END + CASE WHEN col.is_nullable=1 AND typ.name NOT IN ('binary', 'varbinary', 'image', 'text', 'ntext', 'varchar', 'nvarchar', 'char', 'nchar') THEN '?' ELSE '' END ColumnType,
         colDesc.colDesc AS ColumnDesc

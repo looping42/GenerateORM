@@ -16,21 +16,25 @@ namespace GenerateORM.Model
     {
         private CodeCompileUnit targetUnit;
         private CodeTypeDeclaration targetClass;
+        private string nameSpace;
 
-        public GenerateClass(CodeCompileUnit targetunit, CodeTypeDeclaration targetclass)
-
+        public GenerateClass(CodeCompileUnit targetunit, CodeTypeDeclaration targetclass, string nameSPace)
         {
             targetUnit = targetunit;
             targetClass = targetclass;
+            nameSpace = nameSPace;
         }
 
-        public void CreateClass(string nameSpace, List<BddTable> bddtables)
+        public void CreateClass(string nameClass, List<BddLine> bddLines)
         {
-            CodeNamespace samples = new CodeNamespace(nameSpace);
+            //Namespace
+            CodeNamespace samples = new CodeNamespace();
             samples.Imports.Add(new CodeNamespaceImport("System"));
-            samples.Types.Add(targetClass);
+
+            targetClass.Name = nameClass;
             targetClass.IsClass = true;
             targetClass.TypeAttributes = TypeAttributes.Public | TypeAttributes.Class;
+            samples.Types.Add(targetClass);
             targetUnit.Namespaces.Add(samples);
 
             //CodeEntryPointMethod start = new CodeEntryPointMethod();
@@ -40,36 +44,32 @@ namespace GenerateORM.Model
             //}
 
             //targetClass.Members.Add(start);
-            AddFields(bddtables);
+            AddFields(bddLines);
         }
 
         public void GenerateCSharpCode(string fileName)
         {
-            var file = Path.Combine(fileName, "testcs");
             CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
             CodeGeneratorOptions options = new CodeGeneratorOptions();
             options.BracingStyle = "C";
-            using (StreamWriter sourceWriter = new StreamWriter(file))
+            using (StreamWriter sourceWriter = new StreamWriter(fileName))
             {
                 provider.GenerateCodeFromCompileUnit(targetUnit, sourceWriter, options);
             }
         }
 
-        public void AddFields(List<BddTable> bddtables)
+        public void AddFields(List<BddLine> bddLines)
         {
-            foreach (BddTable bddTable in bddtables)
+            foreach (BddLine bddLine in bddLines)
             {
-                foreach (BddLine bddLine in bddTable.bddLines)
+                CodeMemberField field = new CodeMemberField
                 {
-                    CodeMemberField field = new CodeMemberField
-                    {
-                        Name = bddLine.ColumnName,
-                        Attributes = MemberAttributes.Public,
-                        Type = new CodeTypeReference(bddLine.ColumnType),
-                    };
-                    field.Name += " { get;  set; }";
-                    targetClass.Members.Add(field);
-                }
+                    Name = bddLine.ColumnName,
+                    Attributes = MemberAttributes.Public,
+                    Type = new CodeTypeReference(bddLine.ColumnType, CodeTypeReferenceOptions.GlobalReference),
+                };
+                field.Name += " { get;  set; }";
+                targetClass.Members.Add(field);
             }
 
             // Declare the widthValue field.

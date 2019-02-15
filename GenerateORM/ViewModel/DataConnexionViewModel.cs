@@ -16,6 +16,7 @@ using Dapper;
 using Dapper.Contrib;
 using Dapper.Contrib.Extensions;
 using Ressource;
+using System.IO;
 
 namespace GenerateORM.ViewModel
 {
@@ -179,9 +180,13 @@ namespace GenerateORM.ViewModel
             List<BddTable> tables = sqlTable.CreateTableClass();
 
             string path = TemporaryRepertory.CreateUniqueTempDirectory();
-            GenerateClass generateClass = new GenerateClass(new System.CodeDom.CodeCompileUnit(), new System.CodeDom.CodeTypeDeclaration());
-            generateClass.CreateClass("test", tables);
-            generateClass.GenerateCSharpCode(path);
+            foreach (BddTable bddTable in tables)
+            {
+                GenerateClass generateClass = new GenerateClass(new System.CodeDom.CodeCompileUnit(), new System.CodeDom.CodeTypeDeclaration(), "namespacerandom");
+                generateClass.CreateClass(bddTable.Name, bddTable.BddLines);
+                generateClass.GenerateCSharpCode(Path.Combine(path, bddTable.Name));
+            }
+
             //using (SqlConnection connection = new SqlConnection(con))
             //{
             //    connection.Open();
