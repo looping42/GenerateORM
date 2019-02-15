@@ -77,6 +77,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\BddLine.cs" />
+    <Compile Include="Model\BddTable.cs" />
     <Compile Include="Model\ConnexionBdd.cs" />
     <Compile Include="Model\DatabaseData.cs" />
     <Compile Include="Model\GenerateClass.cs" />

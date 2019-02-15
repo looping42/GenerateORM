@@ -21,7 +21,7 @@ namespace GenerateORM.Model
             this.selectGetterSetterTable = selectGetterSetterTable;
         }
 
-        public List<StringBuilder> CreateTableClass()
+        public List<BddTable> CreateTableClass()
         {
             return this.GenerateSqlTable(this.Gettable());
         }
@@ -45,30 +45,34 @@ namespace GenerateORM.Model
             return table;
         }
 
-        private List<StringBuilder> GenerateSqlTable(List<string> tableToExport)
+        private List<BddTable> GenerateSqlTable(List<string> tableToExport)
         {
-            List<StringBuilder> strTable = new List<StringBuilder>();
+            List<BddTable> bddTables = new List<BddTable>();
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-
                 foreach (string tableUnique in tableToExport)
                 {
-                    StringBuilder str = new StringBuilder();
-
+                    List<BddLine> bddLines = new List<BddLine>();
                     SqlCommand command = new SqlCommand(string.Format(selectGetterSetterTable, tableUnique), con);
                     command.Parameters.AddWithValue("@TableNameParam", tableUnique);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            str.Append(reader.GetString(0) + Environment.NewLine);
+                            BddLine bddLine = new BddLine();
+                            bddLine.ColumnName = reader["ColumnName"].ToString();
+                            bddLine.ColumnType = reader["ColumnType"].ToString();
+                            bddLine.Column_id = Convert.ToInt32(reader["Column_id"]);
+                            bddLines.Add(bddLine);
                         }
                     }
-                    strTable.Add(str);
+                    BddTable bddTable = new BddTable();
+                    bddTable.bddLines = bddLines;
+                    bddTables.Add(bddTable);
                 }
             }
-            return strTable;
+            return bddTables;
         }
     }
 }

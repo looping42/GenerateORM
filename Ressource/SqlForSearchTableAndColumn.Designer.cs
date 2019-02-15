@@ -61,7 +61,7 @@ namespace Ressource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to select &apos;public &apos; + ColumnType + &apos; &apos; + ColumnName + &apos; {{ get; set; }}&apos;as getter
+        ///   Looks up a localized string similar to select  ColumnType ,ColumnName ,Column_id
         ///from
         ///(
         ///    select
@@ -75,7 +75,8 @@ namespace Ressource {
         ///            when &apos;date&apos; then &apos;DateTime&apos;
         ///            when &apos;datetime&apos; then &apos;DateTime&apos;
         ///            when &apos;datetime2&apos; then &apos;DateTime&apos;
-        ///            when &apos;datetimeoffset [rest of string was truncated]&quot;;.
+        ///            when &apos;datetimeoffset&apos; then &apos;DateTimeOffset&apos;
+        ///             [rest of string was truncated]&quot;;.
         /// </summary>
         public static string GetGetterSetter {
             get {

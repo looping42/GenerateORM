@@ -175,23 +175,20 @@ namespace GenerateORM.ViewModel
             string con = string.Format(Properties.Settings.Default.ConnectionModel, txtChaineConnexion, bddSelected);
 
             SqlTable sqlTable = new SqlTable(con, SqlForSearchTableAndColumn.GetTable, SqlForSearchTableAndColumn.GetGetterSetter);
-            sqlTable.CreateTableClass();
 
-            List<StringBuilder> tables = new List<StringBuilder>();
+            List<BddTable> tables = sqlTable.CreateTableClass();
 
             string path = TemporaryRepertory.CreateUniqueTempDirectory();
-            GenerateClass generateClass = new GenerateClass();
-            generateClass.CreateClass(tables, "test");
+            GenerateClass generateClass = new GenerateClass(new System.CodeDom.CodeCompileUnit(), new System.CodeDom.CodeTypeDeclaration());
+            generateClass.CreateClass("test", tables);
             generateClass.GenerateCSharpCode(path);
-            using (SqlConnection connection = new SqlConnection(con))
-            {
-                connection.Open();
-                List<User> user = new List<User>();
-                var identity = connection.Insert(user);
-            }
-
-            //Table hostWindow = new Table(con);
-            //hostWindow.Show();
+            //using (SqlConnection connection = new SqlConnection(con))
+            //{
+            //    connection.Open();
+            //    List<User> user = new List<User>();
+            //    var identity = connection.Insert(user);
+            //}
+            System.Diagnostics.Process.Start(path);
         }
     }
 

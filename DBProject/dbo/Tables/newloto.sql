@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[newloto] (
+    [jourtirage]                              VARCHAR (20) NULL,
+    [date_de_tirage]                          DATE         NULL,
+    [date_de_forclusion]                      DATE         NULL,
+    [boule_1]                                 SMALLINT     NULL,
+    [boule_2]                                 SMALLINT     NULL,
+    [boule_3]                                 SMALLINT     NULL,
+    [boule_4]                                 SMALLINT     NULL,
+    [boule_5]                                 SMALLINT     NULL,
+    [numero_chance]                           SMALLINT     NULL,
+    [combinaison_gagnante_en_ordre_croissant] VARCHAR (50) NULL,
+    [nombre_de_gagnant_au_rang1]              INT          NULL,
+    [rapport_du_rang1]                        INT          NULL,
+    [nombre_de_gagnant_au_rang2]              INT          NULL,
+    [rapport_du_rang2]                        INT          NULL,
+    [nombre_de_gagnant_au_rang3]              INT          NULL,
+    [rapport_du_rang3]                        INT          NULL,
+    [nombre_de_gagnant_au_rang4]              INT          NULL,
+    [rapport_du_rang4]                        INT          NULL,
+    [nombre_de_gagnant_au_rang5]              INT          NULL,
+    [rapport_du_rang5]                        INT          NULL,
+    [nombre_de_gagnant_au_rang6]              INT          NULL,
+    [rapport_du_rang6]                        INT          NULL,
+    [numero_jokerplus]                        INT          NULL,
+    [devise]                                  VARCHAR (20) NULL
+);
+
